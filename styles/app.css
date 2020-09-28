@@ -35,3 +35,37 @@ h5{
   font-family: Arial, Helvetica, sans-serif;
   margin: 2px;
 }
+p{
+ text-align:center;
+ color: pink;
+ font-size: 30px;
+ 
+}
+ .unique {
+  
+  width: 40;
+  height: 40%;
+  display: inline-block;
+}  
+.dog-post{
+ height: 40%;
+ width: 40%;
+ 
+}
+img {
+ height: 40%;
+ width: 40%;
+ 
+ 
+}
+.card-photo {
+  text-align: center;
+  
+  padding: 1rem;
+  width: 40%;
+  height: 40%;
+  display: inline-block;
+  
+  
+}
+
