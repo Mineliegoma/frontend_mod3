@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", e => {
  const renderPhotos = photos => {
 
   for (let photo of photos) {
+   const photoDiv = document.querySelector('#dog-post')
    let newDiv = renderPhoto(photo)
    photoDiv.append(newDiv)
   }
@@ -77,9 +78,6 @@ document.addEventListener("DOMContentLoaded", e => {
 
      )
 
-
-
-
    } else if (e.target.matches(".delete-button")) {
     //console.log(e.target)
     const bttn = e.target
@@ -91,11 +89,12 @@ document.addEventListener("DOMContentLoaded", e => {
      .then(response => response.json())
      .then(photo => bttn.parentNode.remove())
 
+   } else if (e.target.matches('.comment-button')) {
+    console.log(e.target)
    }
-
   })
-
  }
+
  const submitHandler = () => {
   document.addEventListener('submit', e => {
    e.preventDefault()
@@ -128,6 +127,11 @@ document.addEventListener("DOMContentLoaded", e => {
 
   })
  }
+
+
+
+
+
  getPhotos()
  clickHandler()
  submitHandler()

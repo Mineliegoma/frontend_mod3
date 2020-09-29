@@ -1,7 +1,7 @@
 
 form{
  margin: 0 auto;
- width: 75%;
+ width: 50%;
  display: flex
 }
 h5{
@@ -67,5 +67,11 @@ img {
   display: inline-block;
   
   
+  
 }
+h5 {
+ width: 48%;
+ 
+}
+
 
