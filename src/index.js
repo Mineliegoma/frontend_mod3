@@ -7,15 +7,19 @@ document.addEventListener("DOMContentLoaded", e => {
    .then(response => response.json())
    .then(photos => renderPhotos(photos))
  }
-
+ //get all the photos and append it to the dom
  const renderPhotos = photos => {
-  //const photoDiv = document.querySelector('#dog-post')
 
   for (let photo of photos) {
    let newDiv = renderPhoto(photo)
    photoDiv.append(newDiv)
   }
  }
+ //create an element
+ // give that element a dataset attribute
+ // create a innerHtml for the photos attributes
+ //return the element
+
 
  const renderPhoto = photo => {
   const newDiv = document.createElement('div')
@@ -32,8 +36,6 @@ document.addEventListener("DOMContentLoaded", e => {
        <button class="comment-button" data-photo-id2="${photo.id}">&#128172;</button>
        <button class="delete-button" data-photo-id2="${photo.id}">x</button></button>
     `
-
-  // toyCollection.append(toyDiv)
   return newDiv
  }
 
