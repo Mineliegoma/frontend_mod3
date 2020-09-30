@@ -73,5 +73,38 @@ h5 {
  width: 48%;
  
 }
+ul {
+    list-style-type: none;
+}
+li {
+  list-style-type: none;
+  color: pink;
+}
+.comment-form{
+  display: grid;
+  flex-flow: row wrap;
+  align-items: center;
+  width: 10%;
+  color: pink;
+  
+}
+.submit-comment {
+  position: relative;
+  background-color: lightblue;
+  border-radius: 3px;
+  height: 2.5rem;
+  width: max-content;
+  color: whitesmoke;
+  font-size: 15px;
+  justify-self: center;
+  font-family: monospace;
+  margin: 2px;
+}
+.submit-comment:hover {
+  background-color: whitesmoke;
+  color: pink
+}
+
+
 
 
