@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", e => {
-  url = "http://localhost:3000/api/v1/photos/"
+  const url = "http://localhost:3000/api/v1/photos/"
+  const baseUrl = "http://localhost:3000/api/v1/comments/"
   const photoDiv = document.querySelector('#dog-post')
   const formAddPhoto = document.querySelector('.add-photo')
+  const ulEl = document.querySelector('ul')
 
   const getPhotos = () => {
     fetch(url)
@@ -16,6 +18,8 @@ document.addEventListener("DOMContentLoaded", e => {
       photoDiv.append(newDiv)
     }
   }
+
+
   //create an element
   // give that element a dataset attribute
   // create a innerHtml for the photos attributes
@@ -38,6 +42,9 @@ document.addEventListener("DOMContentLoaded", e => {
     return newDiv
     //photoDiv.append(newDiv)
   }
+  // photo.comments.forEach(comment => {
+  //   console.log(comment)
+  // })
 
 
   // click handler on photos using event delegations 
@@ -56,7 +63,7 @@ document.addEventListener("DOMContentLoaded", e => {
           + "likes"
         let myLikes = numberLikes.textContent
         const id = likeBtn.dataset.photoId
-        console.log(id)
+        //console.log(id)
 
         const options = {
           method: "PATCH",
@@ -103,6 +110,7 @@ document.addEventListener("DOMContentLoaded", e => {
         // give it the dogs id
         const formComment = document.createElement('form')
         formComment.dataset.commentId = wo.dataset.photoId
+        const myId = formComment.dataset.commentId
         formComment.classList.add('comment-form')
         formComment.innerHTML = `
         <label>name:</label>
@@ -116,8 +124,35 @@ document.addEventListener("DOMContentLoaded", e => {
         formAddPhoto.innerHTML = ''
         photoDiv.children[0].children[7].className = 'none'
         //console.log(photoDiv.children[0].children[7].className)
+        //FIND THE UL
+        const ulEl = document.querySelector('ul')
 
+        //FETCH all the comments by going to photo/id
+        const options = {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+            "accept": "application/json"
+          },
+          //body: JSON.stringify({ likes: myLikes })
+        }
+
+        fetch(url + myId, options)
+          .then(response => response.json())
+          .then(photo =>
+            renderOnePhoto(photo)
+
+          )
+        //ITERATE THRought the dog comments , for each of them i should create a li, and attach a li to the ul.
         //console.log(formComment)
+        const renderOnePhoto = photo => {
+          photo.comments.forEach(comment => {
+            const li = document.createElement('li')
+            li.innerText = `${comment.name} ${comment.text}`
+            ulEl.append(li)
+            //console.log(comment)
+          })
+        }
         /////////////////////////////////////////////////////
         //lets grab the inputs from the form
         // add a submit listener to the form
@@ -128,20 +163,48 @@ document.addEventListener("DOMContentLoaded", e => {
           const btn = e.target
           const theName = forme.name.value
           const comment = forme.thoughts.value
+          const formId = btn.dataset.commentId
+          //console.log(formId)
           //console.log(theName, comment)
           ////////////////////////////////////////////////////
           //create a li
 
-          const ulEl = document.createElement('ul')
-          ulEl.dataset.ulId = btn.dataset.commentId
+          const ulEl = document.querySelector('ul')
+
+
+          ulEl.id = formId
           //console.log(ulEl)
-          const commentLi = document.createElement('li')
-          commentLi.textContent = theName + "\xa0\xa0\xa0\xa0\xa0" + "Comment:" + "   " + comment
-          ulEl.append(commentLi)
-          photoDiv.append(commentLi)
+          let xSquare = document.createElement('li')
+          xSquare.textContent = `${theName} comments ${comment}`
+          ulEl.append(xSquare)
+          //debugger
           forme.reset()
           //console.log(btn)
           //"\xa0\xa0\xa0\xa0\xa0\xa0"
+
+          const com = {
+            name: theName,
+            text: comment,
+            photo_id: formId,
+          }
+          const options = {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              "accept": "application/json"
+            },
+            body: JSON.stringify(com)
+          }
+          fetch(BaseUrl, options)
+            .then(response => response.json())
+            .then(comment =>
+
+              console.log(comment)
+
+              // }
+
+
+            )
 
 
 
@@ -201,12 +264,23 @@ document.addEventListener("DOMContentLoaded", e => {
         .then(photo => {
           const photoNewDiv = renderPhoto(photo)
           photoDiv.append(photoNewDiv)
+          //console.log(photorenderPhoto(photo)
         })
 
     })
   }
 
-
+  // const getComments = () => {
+  //   fetch(baseUrl)
+  //     .then(response => response.json())
+  //     .then(comments => renderComments(comments))
+  // }
+  // const renderComments = comments => {
+  //   comments.forEach(comment => {
+  //     const boom = comment.photo_id
+  //     console.log(comment)
+  //   })
+  // }
 
 
 
@@ -214,6 +288,7 @@ document.addEventListener("DOMContentLoaded", e => {
   getPhotos()
   clickHandler()
   submitHandler()
+  //getComments()
 
 
 
