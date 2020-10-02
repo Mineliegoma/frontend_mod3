@@ -1,11 +1,16 @@
+body {
 
+background-color: #CAE4DB; 
+color: #a28089;
+
+}
 form{
  margin: 0 auto;
  width: 50%;
  display: flex
 }
 h5{
- color: lightblue;
+ color: rgb(1, 12, 15);
 }
 
 .submit {
@@ -53,7 +58,8 @@ p{
  
 }
 img {
- height: 160px;
+ height: 300px;
+ 
 
  
  
@@ -78,7 +84,7 @@ ul {
 }
 li {
   list-style-type: none;
-  color: pink;
+  color: #f75990;
 }
 .comment-form{
   display: grid;

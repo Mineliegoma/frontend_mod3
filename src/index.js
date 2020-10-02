@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", e => {
         const renderOnePhoto = photo => {
           photo.comments.forEach(comment => {
             const li = document.createElement('li')
-            li.innerText = `${comment.name} ${comment.text}`
+            li.innerText = `${comment.name}` + "----- " + `${comment.text}`
             ulEl.append(li)
             //console.log(comment)
           })
@@ -175,7 +175,8 @@ document.addEventListener("DOMContentLoaded", e => {
           ulEl.id = formId
           //console.log(ulEl)
           let xSquare = document.createElement('li')
-          xSquare.textContent = `${theName} comments ${comment}`
+          //= `${theName} comments ${comment}`
+          xSquare.textContent = `${theName}` + "----- " + `${comment}`
           ulEl.append(xSquare)
           //debugger
           forme.reset()
@@ -195,16 +196,17 @@ document.addEventListener("DOMContentLoaded", e => {
             },
             body: JSON.stringify(com)
           }
-          fetch(BaseUrl, options)
+          fetch(baseUrl, options)
             .then(response => response.json())
-            .then(comment =>
-
-              console.log(comment)
+            .then(comment => {
+              let commen = renderOnePhoto(comment)
+              ulEl.append(commen)
+              //console.log(comment)
 
               // }
 
 
-            )
+            })
 
 
 
